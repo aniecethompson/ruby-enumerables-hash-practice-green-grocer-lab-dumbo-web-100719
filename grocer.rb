@@ -53,18 +53,6 @@ def apply_coupons(cart, coupons)
   end
   hash
 end
-def apply_coupons(cart, coupons)
-  coupons.each do |element|
-    name= element[:item]
-    amount= element[:num]
-    
-    if cart.has_key?(name) && cart[name][:count] >= element[:num] && cart[name][:clearance]
-      puts "yes"
-    end
-    
-  end
-  
-end
 
      
 def apply_clearance(cart)

@@ -27,6 +27,7 @@ end
 # cart
 # end
 
+def apply_coupons(cart:[], coupons:[])
   my_hash = {}
   if coupons == nil || coupons.empty?
     my_hash = cart

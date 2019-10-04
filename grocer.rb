@@ -42,10 +42,11 @@ def apply_single_coupon(cart, coupon)
 end
 
 def apply_coupons(cart: [], coupons: [])
-    
+    coupons.each do |couponHash|
+    apply_single_coupon(cart, couponHash)
   end
   cart
-end
+
 
      
 def apply_clearance(cart)

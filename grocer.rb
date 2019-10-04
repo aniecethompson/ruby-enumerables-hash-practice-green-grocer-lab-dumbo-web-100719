@@ -52,7 +52,6 @@ def apply_coupons(cart:[], coupons:[])
 
   cart
 end
-end
 
      
 def apply_clearance(cart)

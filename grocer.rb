@@ -42,7 +42,7 @@ def apply_single_coupon(cart, coupon)
 end
 
 def apply_coupons(cart: [], coupons: [])
-    apply_single_coupon(cart, couponHash)
+    
   end
   cart
 end

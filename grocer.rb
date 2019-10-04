@@ -28,9 +28,7 @@ end
 # end
 
 def apply_coupons(cart:[], coupons:[])
-
-  cart_cons = consolidate_cart(cart: cart)
-  cart_cons = cart
+cart_cons = cart
   coupons.each do |coupon|
     item_name = coupon[:item]
     if cart_cons.keys.include?(item_name)
@@ -43,7 +41,8 @@ def apply_coupons(cart:[], coupons:[])
     end
   end
   return cart_cons
-end
+ end
+
 
      
 def apply_clearance(cart)

@@ -41,6 +41,11 @@ def apply_single_coupon(cart, coupon)
   end
 end
 
+def apply_coupons(cart: [], coupons: [])
+    apply_single_coupon(cart, couponHash)
+  end
+  cart
+end
 
      
 def apply_clearance(cart)

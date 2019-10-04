@@ -27,29 +27,28 @@ end
 # cart
 # end
 
-
 def apply_coupons(cart, coupons)
-    new_hash = {}
-    cart.each do |vegetable, properties|
-      if !new_hash[vegetable]
-        new_hash[vegetable] = properties
-      end
-      coupons.each do |hash|
-        hash.each do |coupon_key, coupon_value|
-          if coupon_value == vegetable
-            if !new_hash["#{vegetable} W/COUPON"]
-              new_hash["#{vegetable} W/COUPON"] = {:price => hash[:cost], :clearance => cart[vegetable][:clearance], :count => 0}
-            end
-            if !(new_hash[vegetable][:count] < hash[:num])
-              new_hash[vegetable][:count] -= hash[:num]
-              new_hash["#{vegetable} W/COUPON"][:count] += 1
-            end
-          end
+  coupons.each do |coupon|
+    if cart.keys.include?(coupon[:item])
+      if cart[coupon[:item]][:count] >= coupon[:num]
+        itemwithCoupon = "#{coupon[:item]} W/COUPON"
+        if cart[itemwithCoupon]
+          cart[itemwithCoupon][:count] += coupon[:num]
+          cart[coupon[:item]][:count] -= coupon[:num]
+        else
+          cart[itemwithCoupon] = {}
+          cart[itemwithCoupon][:price] = (coupon[:cost] / coupon[:num])
+          cart[itemwithCoupon][:clearance] = cart[coupon[:item]][:clearance]
+          cart[itemwithCoupon][:count] = coupon[:num]
+          cart[coupon[:item]][:count] -= coupon[:num]
         end
       end
     end
-    new_hash
+  end
+  cart
+
 end
+
 
 
      

@@ -27,34 +27,25 @@ end
 # cart
 # end
 
-def apply_coupons(cart:[], coupons:[])
-  my_hash = {}
-  if coupons == nil || coupons.empty?
-    my_hash = cart
-  end
-  coupons.each do |coupon|
-    cart.each do |itemname, data|
-      if itemname == coupon[:item]
-        count = data[:count] - coupon[:num]
 
-        if count >= 0
-          if my_hash["#{itemname} W/COUPON"] == nil
-            my_hash["#{itemname} W/COUPON"] = {price: coupon[:cost], clearance: data[:clearance], count: 1}
-          else
-            couponcount = my_hash["#{itemname} W/COUPON"][:count] + 1
-            my_hash["#{itemname} W/COUPON"] = {price: coupon[:cost], clearance: data[:clearance], count: couponcount}
-          end
+def apply_coupons(cart, coupons)
+  # code here
+  new_cart = {}
+  cart.each do |grocery, info|
+    coupons.each do |coupon|
+      if grocery == coupon[:item] && info[:count] >= coupon[:num]
+        cart[grocery][:count] = cart[grocery][:count] - coupon[:num]
+        if new_cart[grocery + " W/COUPON"]
+          new_cart[grocery + " W/COUPON"][:count] += 1
         else
-          count = data[:count]
+          new_cart[grocery + " W/COUPON"] = {:price => coupon[:cost], :clearance => cart[grocery][:clearance], :count => 1}
         end
-        my_hash[itemname] = data
-        my_hash[itemname][:count] = count
-      else
-        my_hash[itemname] = data
       end
     end
+    new_cart[grocery] = info
+
   end
-  my_hash
+  new_cart
 end
 
 
